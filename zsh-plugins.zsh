@@ -38,6 +38,18 @@ bindkey -M emacs "${terminfo[kdch1]}" delete-char
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 
+typeset -A ZSH_HIGHLIGHT_PATTERNS
+typeset -A ZSH_HIGHLIGHT_REGEXP
+typeset -A ZSH_HIGHLIGHT_STYLES
+
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main)
+ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red')
+ZSH_HIGHLIGHT_REGEXP+=('^\s*sudo' fg=red,bold)
+ZSH_HIGHLIGHT_STYLES[cursor]='fg=27,bg=255'
+ZSH_HIGHLIGHT_STYLES[alias]='fg=29,bold'
+ZSH_HIGHLIGHT_STYLES[path]='fg=cyan'
+
+# functions
 COPY () xclip -selection clipboard < "${1:-unset}"
 PATH () xargs -n1 <<< "${PATH//:/ }"
 MELD2 () meld ~/.a ~/.b
