@@ -18,7 +18,7 @@ ZSH_HIGHLIGHT_STYLES[assign]='fg=39'
 HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='fg=255,bg=27,bold'
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS} 'ma=97;1'
 
 alias ls='ls --color=auto'
 alias diff='diff --color'
