@@ -22,9 +22,10 @@ setopt hist_ignore_dups
 setopt hist_ignore_space
 setopt hist_verify
 setopt share_history
-setopt auto_cd
 setopt multios
 setopt prompt_subst
+
+bindkey -e
 
 bindkey -M emacs "${terminfo[khome]}" beginning-of-line
 bindkey -M emacs "${terminfo[kend]}"  end-of-line
@@ -38,16 +39,14 @@ bindkey -M emacs "${terminfo[kdch1]}" delete-char
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 
-typeset -A ZSH_HIGHLIGHT_PATTERNS
-typeset -A ZSH_HIGHLIGHT_REGEXP
-typeset -A ZSH_HIGHLIGHT_STYLES
-
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main)
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main pattern regexp)
 ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red')
 ZSH_HIGHLIGHT_REGEXP+=('^\s*sudo' fg=red,bold)
 ZSH_HIGHLIGHT_STYLES[cursor]='fg=27,bg=255'
-ZSH_HIGHLIGHT_STYLES[alias]='fg=29,bold'
-ZSH_HIGHLIGHT_STYLES[path]='fg=cyan'
+ZSH_HIGHLIGHT_STYLES[alias]='fg=162,bold'
+ZSH_HIGHLIGHT_STYLES[command]='fg=2,bold'
+ZSH_HIGHLIGHT_STYLES[function]='fg=202,bold'
+ZSH_HIGHLIGHT_STYLES[path]='fg=cyan,underline'
 
 # functions
 COPY () xclip -selection clipboard < "${1:-unset}"
