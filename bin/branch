@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+key=$1
+shift
+
+summary="$(sed \
+	-e 's/\[\|\]//g' \
+	-e 's/[ _]\+/-/g' \
+	-e 's/\s*[-_]*$//g' \
+	<<< "${*}"
+)"
+
+branch="${key/*\//}-${summary,,}"
+if ! grep -P '^\p{L}+-\d+-[\w-]+[^-_]$' <<< "${branch}" ; then
+	echo "${branch}: invalid branch name"
+	exit 1
+fi
+
+git checkout -b "${branch}"

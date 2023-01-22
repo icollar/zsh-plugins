@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+message="Exists"
+url=$1
+
+if ! grep -q '^https://' <<< "${url}" ; then
+	url="https://github.com/${url}"
+fi
+
+if [ "$#" -gt 1 ]; then
+	repo=$2
+else
+	repo=$(basename "$url")
+	repo=${repo/.git}
+fi
+
+project=$(basename "$(dirname "$url")")
+project=${project/\~}
+project=${project##*:}
+
+cd "${HOME}/code/git"
+
+if [ ! -d "$project" ]; then
+	mkdir -p "$project"
+fi
+
+cd "$project"
+
+if [ ! -d "$repo" ]; then
+	git clone "$url" "$repo"
+	message="Cloned"
+fi
+
+cd "$repo"
+
+branch=$(git symbolic-ref -q HEAD)
+branch=${branch##refs/heads/}
+branch=${branch:-HEAD}
+
+echo "$message -> $PWD ($branch)"
+
+echo "cd $PWD" | xclip -selection clipboard

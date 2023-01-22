@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+resources="$(
+	grep -- '^  #' "${1:-${HOME}/.temp}" |
+		grep -vP '\(config' |
+		awk '{print "- `"$2"` - "$NF}'
+)"
+
+echo "${resources}"
+
+xclip -selection clipboard <<< "${resources}"

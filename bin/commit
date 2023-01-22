@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [ $# -eq 0 ]; then
+	message="$(git name | sed -e 's/-/ /g' -e 's/\s/-/')"
+fi
+
+git commit -m "${message:-$*}"

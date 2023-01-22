@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+pattern=$1
+shift
+
+grep -Irns \
+	--color=auto \
+	--exclude-dir venv \
+	--exclude-dir .git \
+	--exclude-dir node_modules \
+	--exclude-dir .terraform \
+	--exclude-dir .serverless \
+	--exclude-dir .envs \
+	--exclude-dir .terraform* \
+	--exclude-dir .tox \
+	--exclude-dir .webpack \
+	--exclude-dir dist \
+	--exclude-dir target \
+	"${pattern}" \
+	"${@}"

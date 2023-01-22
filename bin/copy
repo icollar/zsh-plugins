@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+path=${1}
+if [ ! -f "${path}" ]; then
+	echo "${path}: file not found"
+	exit 1
+fi
+xclip -selection clipboard < "${path}"

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+"${EDITOR}" "${HOME}/.temp"
+xclip -selection clipboard < "${HOME}/.temp"

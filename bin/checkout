@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+next="$(
+	git branch |
+		grep -A 1 -m 1 '*' |
+		tail -n1 |
+		awk '{print $NF}'
+)"
+
+if grep -qP '\*' <<< "${next}"; then
+	next="$(git branch | head -n1 | sed 's/\s*//g')"
+fi
+
+git checkout "${next}"

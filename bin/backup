@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+original=$1
+extension="${original##*.}"
+filename="${original%.*}"
+
+case $extension in
+	tgz)
+		backup="${filename}.$(date +%Y%m%d%H%M%S).${extension}"
+		;;
+	*)
+		backup="${filename}.${extension}.$(date +%Y%m%d%H%M%S)"
+		;;
+esac
+
+cp -r "${original}" "${backup}"
