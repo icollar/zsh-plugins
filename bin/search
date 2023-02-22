@@ -19,4 +19,4 @@ grep -Irns \
 	--exclude-dir dist \
 	--exclude-dir target \
 	"${pattern}" \
-	"${@}"
+	"${@:-.}"

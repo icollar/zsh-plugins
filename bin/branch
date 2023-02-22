@@ -18,4 +18,4 @@ if ! grep -P '^\p{L}+-\d+-[\w-]+[^-_]$' <<< "${branch}" ; then
 	exit 1
 fi
 
-git checkout -b "${branch}"
+git checkout -B "${branch}"
